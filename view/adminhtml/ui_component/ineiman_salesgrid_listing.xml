@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Illia Neiman
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ According to LICENCE file you are not allowed to copy, use or recreate this file in any ways.
+  ~ Specially for eCommerce usage.
+  ~
+  ~ @category Ineiman
+  ~ @package SalesGrid
+  ~ @copyright Copyright (c) 2021-current Ineiman (https://github.com/illyaneiman)
+  ~ @email kg.illya.ney@gmail.com
+  -->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">ineiman_salesgrid_listing.ineiman_salesgrid_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>ineiman_salesgrid_columns</spinner>
+        <deps>
+            <dep>ineiman_salesgrid_listing.ineiman_salesgrid_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="ineiman_salesgrid_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">entity_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Ineiman_SalesGrid::ineiman_salesgrid_flat</aclResource>
+        <dataProvider class="IneimanSalesGridDataProvider" name="ineiman_salesgrid_listing_data_source">
+            <settings>
+                <requestFieldName>entity_id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls" class="Ineiman\SalesGrid\Ui\Component\Columns" component="Magento_Ui/js/grid/controls/columns">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Ineiman_SalesGrid/js/grid/controls/columns</item>
+                    <item name="tabsData" xsi:type="array">
+                        <item name="general" xsi:type="string" translate="true">General</item>
+                        <item name="product" xsi:type="string" translate="true">Product</item>
+                        <item name="customer" xsi:type="string" translate="true">Customer</item>
+                        <item name="billing" xsi:type="string" translate="true">Billing</item>
+                        <item name="shipping" xsi:type="string" translate="true">Shipping</item>
+                        <item name="unassigned" xsi:type="string" translate="true">Other</item>
+                    </item>
+                    <item name="productColsData" xsi:type="array">
+                        <item name="product_sales_order_item_name" xsi:type="array">
+                            <item name="visible" xsi:type="boolean">false</item>
+                            <item name="filter" xsi:type="string">text</item>
+                            <item name="label" xsi:type="string" translate="true">Name</item>
+                        </item>
+                        <item name="product_sales_order_item_sku" xsi:type="array">
+                            <item name="visible" xsi:type="boolean">false</item>
+                            <item name="filter" xsi:type="string">text</item>
+                            <item name="label" xsi:type="string" translate="true">SKU</item>
+                        </item>
+                        <item name="product_sales_order_item_product_type" xsi:type="array">
+                            <item name="visible" xsi:type="boolean">false</item>
+                            <item name="filter" xsi:type="string">text</item>
+                            <item name="label" xsi:type="string" translate="true">Type</item>
+                        </item>
+                        <item name="product_sales_order_item_base_price" xsi:type="array">
+                            <item name="visible" xsi:type="boolean">false</item>
+                            <item name="filter" xsi:type="string">textRange</item>
+                            <item name="label" xsi:type="string" translate="true">Price (Base)</item>
+                        </item>
+                        <item name="product_sales_order_item_qty_ordered" xsi:type="array">
+                            <item name="visible" xsi:type="boolean">false</item>
+                            <item name="filter" xsi:type="string">textRange</item>
+                            <item name="label" xsi:type="string" translate="true">Qty Ordered</item>
+                        </item>
+                        <item name="product_sales_order_item_qty_invoiced" xsi:type="array">
+                            <item name="visible" xsi:type="boolean">false</item>
+                            <item name="filter" xsi:type="string">textRange</item>
+                            <item name="label" xsi:type="string" translate="true">Qty Invoiced</item>
+                        </item>
+                        <item name="product_sales_order_item_qty_shipped" xsi:type="array">
+                            <item name="visible" xsi:type="boolean">false</item>
+                            <item name="filter" xsi:type="string">textRange</item>
+                            <item name="label" xsi:type="string" translate="true">Qty Shipped</item>
+                        </item>
+                        <item name="product_sales_order_item_qty_refunded" xsi:type="array">
+                            <item name="visible" xsi:type="boolean">false</item>
+                            <item name="filter" xsi:type="string">textRange</item>
+                            <item name="label" xsi:type="string" translate="true">Qty Refunded</item>
+                        </item>
+                        <item name="product_sales_order_item_qty_canceled" xsi:type="array">
+                            <item name="visible" xsi:type="boolean">false</item>
+                            <item name="filter" xsi:type="string">textRange</item>
+                            <item name="label" xsi:type="string" translate="true">Qty Canceled</item>
+                        </item>
+                        <item name="product_sales_order_item_row_total" xsi:type="array">
+                            <item name="visible" xsi:type="boolean">false</item>
+                            <item name="filter" xsi:type="string">textRange</item>
+                            <item name="label" xsi:type="string" translate="true">Row Total (Purchased)</item>
+                        </item>
+                    </item>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="provider" xsi:type="string">ineiman_salesgrid_listing.ineiman_salesgrid_listing.listing_top.bookmarks</item>
+                        <item name="namespace" xsi:type="string">current</item>
+                    </item>
+                    <item name="clientConfig" xsi:type="array">
+                        <item name="saveUrl" xsi:type="url" path="mui/index/render"/>
+                        <item name="validateBeforeSave" xsi:type="boolean">false</item>
+                    </item>
+                </item>
+            </argument>
+        </columnsControls>
+        <filterSearch name="fulltext"/>
+        <filters name="listing_filters">
+            <settings>
+                <templates>
+                    <filters>
+                        <select>
+                            <param name="template" xsi:type="string">ui/grid/filters/elements/ui-select</param>
+                            <param name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</param>
+                        </select>
+                    </filters>
+                </templates>
+            </settings>
+        </filters>
+        <paging name="listing_paging"/>
+        <exportButton name="export_button"/>
+    </listingToolbar>
+    <columns name="ineiman_salesgrid_columns" class="Ineiman\SalesGrid\Ui\Component\Listing\Columns" component="Magento_Ui/js/grid/listing">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="storageConfig" xsi:type="array">
+                    <item name="provider" xsi:type="string">ns = ${ $.ns }, index = bookmarks</item>
+                    <item name="namespace" xsi:type="string">current</item>
+                </item>
+                <item name="childDefaults" xsi:type="array">
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="provider" xsi:type="string">ns = ${ $.ns }, index = bookmarks</item>
+                        <item name="root" xsi:type="string">columns.${ $.index }</item>
+                        <item name="namespace" xsi:type="string">current.${ $.storageConfig.root }</item>
+                    </item>
+                </item>
+            </item>
+        </argument>
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>entity_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <actionsColumn name="actions" class="Ineiman\SalesGrid\Ui\Component\Listing\Column\Actions">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">general</item>
+                </item>
+            </argument>
+            <settings>
+                <indexField>entity_id</indexField>
+            </settings>
+        </actionsColumn>
+        <column name="general_sales_order_increment_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">general</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">ID (Order Increment ID)</label>
+            </settings>
+        </column>
+        <column name="store_name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">general</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Purchase Point</label>
+            </settings>
+        </column>
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">general</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Purchase Date</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="base_grand_total" class="Magento\Sales\Ui\Component\Listing\Column\Price">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">general</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Grand Total (Base)</label>
+            </settings>
+        </column>
+        <column name="general_sales_order_status_label">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">general</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Status</label>
+            </settings>
+        </column>
+        <column name="payment_method">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">general</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Payment Method</label>
+            </settings>
+        </column>
+        <column name="total_refunded" class="Magento\Sales\Ui\Component\Listing\Column\PurchasedPrice">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">general</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Total Refunded</label>
+            </settings>
+        </column>
+        <column name="general_sales_order_coupon_code">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">general</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Coupon Code</label>
+            </settings>
+        </column>
+        <column name="general_sales_order_tax_amount" class="Magento\Sales\Ui\Component\Listing\Column\PurchasedPrice">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">general</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Order Tax</label>
+            </settings>
+        </column>
+        <column name="general_sales_order_status_history_comment" class="Ineiman\SalesGrid\Ui\Component\Listing\Column\OrderComments">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">general</item>
+                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Order Comments</label>
+                <visible>false</visible>
+            </settings>
+        </column>
+        <column name="shipping_information">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">general</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Shipping method</label>
+            </settings>
+        </column>
+        <column name="subtotal" class="Magento\Sales\Ui\Component\Listing\Column\Price">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">general</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Subtotal (Base)</label>
+            </settings>
+        </column>
+        <column name="total_paid" class="Magento\Sales\Ui\Component\Listing\Column\PurchasedPrice">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">general</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Total Paid</label>
+            </settings>
+        </column>
+        <column name="general_sales_shipment_track_track_number">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">general</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Tracking Number</label>
+            </settings>
+        </column>
+        <column name="general_sales_order_total_qty_ordered">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">general</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Total Qty Ordered</label>
+            </settings>
+        </column>
+        <column name="general_sales_order_items_sku" class="Ineiman\SalesGrid\Ui\Component\Listing\Column\ItemsSku">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">general</item>
+                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Items SKU</label>
+            </settings>
+        </column>
+        <column name="grid_junior_items_ordered">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="filter" xsi:type="boolean">false</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="component" xsi:type="string">Ineiman_SalesGrid/js/grid/columns/items_ordered</item>
+                    <item name="columnsControlsProvider" xsi:type="string">ineiman_salesgrid_listing.ineiman_salesgrid_listing.listing_top.columns_controls</item>
+                    <item name="label" xsi:type="string" translate="true">Product Details</item>
+                </item>
+            </argument>
+        </column>
+        <column name="customer_email">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">customer</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Customer Email</label>
+            </settings>
+        </column>
+        <column name="customer_group">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">customer</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Customer Group</label>
+            </settings>
+        </column>
+        <column name="customer_name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">customer</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Customer Name</label>
+            </settings>
+        </column>
+        <column name="billing_sales_order_grid__billing_name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">billing</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Bill-to Name</label>
+            </settings>
+        </column>
+        <column name="billing_sales_order_grid__billing_address">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">billing</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Billing Address</label>
+            </settings>
+        </column>
+        <column name="billing_sales_order_address_region">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">billing</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Region</label>
+            </settings>
+        </column>
+        <column name="billing_sales_order_address_postcode">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">billing</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Postcode</label>
+            </settings>
+        </column>
+        <column name="billing_sales_order_address_city">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">billing</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">City</label>
+            </settings>
+        </column>
+        <column name="billing_sales_order_address_telephone">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">billing</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Telephone</label>
+            </settings>
+        </column>
+        <column name="billing_sales_order_address_country_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">billing</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Country</label>
+            </settings>
+        </column>
+        <column name="shipping_name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">shipping</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Ship-to Name</label>
+            </settings>
+        </column>
+        <column name="shipping_address">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">shipping</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Shipping Address</label>
+            </settings>
+        </column>
+        <column name="shipping_and_handling" class="Magento\Sales\Ui\Component\Listing\Column\Price">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">shipping</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Shipping and Handling</label>
+            </settings>
+        </column>
+        <column name="shipping_sales_order_address_region">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">shipping</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Region</label>
+            </settings>
+        </column>
+        <column name="shipping_sales_order_address_postcode">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">shipping</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Postcode</label>
+            </settings>
+        </column>
+        <column name="shipping_sales_order_address_city">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">shipping</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">City</label>
+            </settings>
+        </column>
+        <column name="shipping_sales_order_address_telephone">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">shipping</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Telephone</label>
+            </settings>
+        </column>
+        <column name="shipping_sales_order_address_country_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">shipping</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Country</label>
+            </settings>
+        </column>
+    </columns>
+</listing>

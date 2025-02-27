@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+  ~ Illia Neiman
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ According to LICENCE file you are not allowed to copy, use or recreate this file in any ways.
+  ~ Specially for eCommerce usage.
+  ~
+  ~ @category Ineiman
+  ~ @package SalesGrid
+  ~ @copyright Copyright (c) 2021-current Ineiman (https://github.com/illyaneiman)
+  ~ @email kg.illya.ney@gmail.com
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Ineiman_SalesGrid::ineiman_salesgrid_flat"
+             title="Sales Grid"
+             module="Ineiman_SalesGrid"
+             resource="Magento_Sales::sales_order"
+             translate="title"
+             sortOrder="800"
+             action="salesgrid/index/index"
+             parent="Magento_Sales::sales_operation"
+        />
+    </menu>
+</config>

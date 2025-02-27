@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<!--
+  ~ Illia Neiman
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ According to LICENCE file you are not allowed to copy, use or recreate this file in any ways.
+  ~ Specially for eCommerce usage.
+  ~
+  ~ @category Ineiman
+  ~ @package SalesGrid
+  ~ @copyright Copyright (c) 2021-current Ineiman (https://github.com/illyaneiman)
+  ~ @email kg.illya.ney@gmail.com
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Sales::sales"
+                          title="Sales"
+                          translate="title"
+                          sortOrder="20">
+                    <resource id="Magento_Sales::sales_operation"
+                              title="Operations"
+                              translate="title"
+                              sortOrder="10">
+                        <resource id="Ineiman_SalesGrid::ineiman_sales_order_grid_native"
+                                  title="Ineiman Order Sales Grid"
+                                  translate="title"
+                                  sortOrder="80"/>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

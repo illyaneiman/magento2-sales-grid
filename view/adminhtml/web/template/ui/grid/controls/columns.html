@@ -1,0 +1,97 @@
+<!--
+  ~ Illia Neiman
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ According to LICENCE file you are not allowed to copy, use or recreate this file in any ways.
+  ~ Specially for eCommerce usage.
+  ~
+  ~ @category Ineiman
+  ~ @package SalesGrid
+  ~ @copyright Copyright (c) 2021-current Ineiman (https://github.com/illyaneiman)
+  ~ @email kg.illya.ney@gmail.com
+  -->
+
+<div data-bind="collapsible"
+     class="admin__action-dropdown-wrap admin__data-grid-action-columns"
+     data-role="toolbar-menu-item">
+    <button class="admin__action-dropdown"
+            type="button"
+            data-bind="toggleCollapsible"
+            data-toggle="dropdown"
+            aria-haspopup="true">
+        <span class="admin__action-dropdown-text" data-bind="i18n: 'Columns'"></span>
+    </button>
+
+    <div data-bind="css: {_overflow: hasOverflow()}" class="admin__action-dropdown-menu admin__data-grid-action-columns-menu">
+
+        <div class="grid-junior-tabs">
+            <div data-bind="repeat: {foreach: getTabs(), item: '$tab'}">
+                <input data-bind="{
+                    checked: selectedTab,
+                    css: {_selected: hasSelected($tab().key)},
+                    attr: {
+                        id: 'grid_junior_tab_' + $tab().key,
+                        value: $tab().key
+                    }
+                }" type="radio" class="grid-junior-tab" name="grid_junior_tabs">
+                <label class="grid-junior-label" data-bind="{
+                    i18n: $tab().value,
+                    attr: {
+                        for: 'grid_junior_tab_' + $tab().key
+                    }
+                }"></label>
+            </div>
+            <div class="admin__action-dropdown-menu-header">
+                <span data-bind="text: getHeaderMessage()"></span>
+            </div>
+            <div id="grid_junior_content" class="admin__action-dropdown-menu-content">
+                <div data-bind="repeat: {foreach: getTabs(), item: '$tab'}">
+                    <section class="grid-junior-content" data-bind="{
+                        attr: {id: 'grid_junior_content_' + $tab().key},
+                        css: {'gridjunior-active': $tab().key == selectedTab }
+                    }">
+                        <table class="grid-junior-table">
+                            <tr>
+                                <th data-bind="i18n: 'Column'"></th>
+                                <th data-bind="i18n: 'Title'"></th>
+                            </tr>
+                            <tr data-bind="repeat: {foreach: getColumns($tab().key), item: '$col'}">
+                                <td class="grid-junior-cell-label">
+                                    <input class="admin__control-checkbox"
+                                           type="checkbox"
+                                           ko-checked="$col().visible"
+                                           data-bind="
+                                                attr: {
+                                                    id: ++ko.bindingHandlers['uniqueName'].currentIndex + '_uid'
+                                                },
+                                                checked: $col().visible,
+                                                event: { change: reloadGridData.bind($col, {'index': $col().index, 'visible': $col().visible}) }
+                                            ">
+                                    <label class="admin__field-label"
+                                           data-bind="
+                                            text: $col().default_label,
+                                            attr: {
+                                                for: ko.bindingHandlers['uniqueName'].currentIndex + '_uid'
+                                            }"></label>
+
+                                </td>
+                                <td class="grid-junior-cell-title">
+                                    <input class="admin__control-text"
+                                           type="text"
+                                           data-bind="
+                                            attr: {
+                                                id: ++ko.bindingHandlers['uniqueName'].currentIndex + '_utitle'
+                                            },
+                                            value: $col().gridjunior_label,
+                                            event: { change: saveBookmark.bind($data) }"
+                                    >
+                                </td>
+                            </tr>
+                        </table>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

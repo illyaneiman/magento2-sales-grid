@@ -1,0 +1,32 @@
+{
+    "name": "ineiman/module-sales-grid",
+    "description": "Sales Grid Module",
+    "type": "magento2-module",
+    "version": "2.4.6.0",
+    "authors": [
+        {
+            "name": "Illia Neiman",
+            "homepage": "http://local.test"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://github.com/illyaneiman/magento2-sales-grid.git"
+        }
+    ],
+    "require": {
+        "magento/module-sales": "*"
+    },
+    "config": {
+        "preferred-install": "dist"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Ineiman\\SalesGrid\\": ""
+        }
+    }
+}

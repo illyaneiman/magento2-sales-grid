@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<!--
+  ~ Illia Neiman
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ According to LICENCE file you are not allowed to copy, use or recreate this file in any ways.
+  ~ Specially for eCommerce usage.
+  ~
+  ~ @category Ineiman
+  ~ @package SalesGrid
+  ~ @copyright Copyright (c) 2021-current Ineiman (https://github.com/illyaneiman)
+  ~ @email kg.illya.ney@gmail.com
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Indexer/etc/indexer.xsd">
+    <indexer id="ineiman_salesgrid" view_id="ineiman_salesgrid" class="Ineiman\SalesGrid\Model\Indexer\SalesGridIndexer" primary="ineiman_salesgrid">
+        <title translate="true">Ineiman Sales Grid</title>
+        <description translate="true">Indexing Sales Grid Data</description>
+        <fieldset name="general_sales_order_grid" source="Ineiman\SalesGrid\Model\Indexer\OrderGrid\Source" provider="Ineiman\SalesGrid\Model\Indexer\AttributeProvider">
+            <field name="store_name" xsi:type="filterable" dataType="varchar"/>
+            <field name="created_at" xsi:type="filterable" dataType="timestamp"/>
+            <field name="base_grand_total" xsi:type="filterable" dataType="varchar"/>
+            <field name="payment_method" xsi:type="filterable" dataType="varchar"/>
+            <field name="total_refunded" xsi:type="filterable" dataType="varchar"/>
+            <field name="shipping_information" xsi:type="filterable" dataType="varchar"/>
+            <field name="subtotal" xsi:type="filterable" dataType="varchar"/>
+            <field name="total_paid" xsi:type="filterable" dataType="varchar"/>
+            <field name="customer_email" xsi:type="filterable" dataType="varchar"/>
+            <field name="customer_group" xsi:type="filterable" dataType="varchar"/>
+            <field name="customer_name" xsi:type="filterable" dataType="varchar"/>
+            <field name="billing_name" xsi:type="filterable" dataType="varchar"/>
+            <field name="billing_address" xsi:type="filterable" dataType="varchar"/>
+            <field name="shipping_name" xsi:type="filterable" dataType="varchar"/>
+            <field name="shipping_address" xsi:type="filterable" dataType="varchar"/>
+            <field name="shipping_and_handling" xsi:type="filterable" dataType="varchar"/>
+        </fieldset>
+        <fieldset name="general_sales_order" source="Ineiman\SalesGrid\Model\Indexer\Order\Source">
+            <reference fieldset="general_sales_order_grid" from="entity_id" to="entity_id"/>
+            <field name="increment_id" xsi:type="filterable" dataType="varchar"/>
+            <field name="coupon_code" xsi:type="filterable" dataType="varchar"/>
+            <field name="tax_amount" xsi:type="filterable" dataType="varchar"/>
+            <field name="total_qty_ordered" xsi:type="filterable" dataType="int"/>
+            <field name="total_item_count" xsi:type="filterable" dataType="int"/>
+        </fieldset>
+        <fieldset name="general_sales_order_status" source="Ineiman\SalesGrid\Model\Indexer\OrderStatus\Source">
+            <reference fieldset="general_sales_order_grid" from="status" to="status"/>
+            <field name="label" xsi:type="searchable" dataType="varchar"/>
+        </fieldset>
+        <fieldset name="general_sales_order_status_history" source="Ineiman\SalesGrid\Model\Indexer\OrderStatusHistory\Source">
+            <reference fieldset="general_sales_order_grid" from="parent_id" to="entity_id"/>
+            <field name="comment" xsi:type="searchable" dataType="text" handler="CommentHandler"/>
+        </fieldset>
+        <fieldset name="general_sales_shipment_track" source="Ineiman\SalesGrid\Model\Indexer\OrderShipmentTrack\Source">
+            <reference fieldset="general_sales_order_grid" from="order_id" to="entity_id"/>
+            <field name="track_number" xsi:type="filterable" dataType="varchar"/>
+        </fieldset>
+        <fieldset name="general_sales_order_items" source="Ineiman\SalesGrid\Model\Indexer\OrderItem\Source">
+            <reference fieldset="general_sales_order_grid" from="order_id" to="entity_id"/>
+            <field name="sku" xsi:type="filterable" dataType="varchar" handler="ItemsSkuHandler" />
+        </fieldset>
+        <fieldset name="product_sales_order_item" source="Ineiman\SalesGrid\Model\Indexer\OrderItem\Source">
+            <reference fieldset="general_sales_order_grid" from="order_id" to="entity_id"/>
+            <field name="name" xsi:type="filterable" dataType="varchar" handler="NameHandler" />
+            <field name="sku" xsi:type="filterable" dataType="varchar" handler="SkuHandler" />
+            <field name="product_type" xsi:type="filterable" dataType="varchar" handler="ProductTypeHandler" />
+            <field name="base_price" xsi:type="filterable" dataType="varchar" handler="BasePriceHandler" />
+            <field name="qty_ordered" xsi:type="filterable" dataType="varchar" handler="QtyOrderedHandler" />
+            <field name="qty_invoiced" xsi:type="filterable" dataType="varchar" handler="QtyInvoicedHandler" />
+            <field name="qty_shipped" xsi:type="filterable" dataType="varchar" handler="QtyShippedHandler" />
+            <field name="qty_refunded" xsi:type="filterable" dataType="varchar" handler="QtyRefundedHandler" />
+            <field name="qty_canceled" xsi:type="filterable" dataType="varchar" handler="QtyCanceledHandler" />
+            <field name="row_total" xsi:type="filterable" dataType="varchar" handler="RowTotalHandler" />
+        </fieldset>
+        <fieldset name="billing_sales_order_address" source="Ineiman\SalesGrid\Model\Indexer\OrderAddress\Source">
+            <reference fieldset="general_sales_order" from="entity_id" to="billing_address_id"/>
+            <field name="region" xsi:type="filterable" dataType="varchar"/>
+            <field name="postcode" xsi:type="filterable" dataType="varchar"/>
+            <field name="city" xsi:type="filterable" dataType="varchar"/>
+            <field name="telephone" xsi:type="filterable" dataType="varchar"/>
+            <field name="country_id" xsi:type="filterable" dataType="varchar"/>
+        </fieldset>
+        <fieldset name="shipping_sales_order_address" source="Ineiman\SalesGrid\Model\Indexer\OrderAddress\Source">
+            <reference fieldset="general_sales_order" from="entity_id" to="shipping_address_id"/>
+            <field name="region" xsi:type="filterable" dataType="varchar"/>
+            <field name="postcode" xsi:type="filterable" dataType="varchar"/>
+            <field name="city" xsi:type="filterable" dataType="varchar"/>
+            <field name="telephone" xsi:type="filterable" dataType="varchar"/>
+            <field name="country_id" xsi:type="filterable" dataType="varchar"/>
+        </fieldset>
+        <saveHandler class="Magento\Framework\Indexer\SaveHandler\Grid"/>
+        <structure class="Magento\Framework\Indexer\GridStructure"/>
+    </indexer>
+</config>

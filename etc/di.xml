@@ -1,0 +1,107 @@
+<?xml version="1.0" ?>
+<!--
+  ~ Illia Neiman
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ According to LICENCE file you are not allowed to copy, use or recreate this file in any ways.
+  ~ Specially for eCommerce usage.
+  ~
+  ~ @category Ineiman
+  ~ @package SalesGrid
+  ~ @copyright Copyright (c) 2021-current Ineiman (https://github.com/illyaneiman)
+  ~ @email kg.illya.ney@gmail.com
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="IneimanSalesGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="IneimanSalesGridDataProvider" type="Ineiman\SalesGrid\Ui\DataProvider\Sales\Order\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Ineiman\SalesGrid\Model\ResourceModel\Sales\Order\GridJunior\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">IneimanSalesGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <type name="Ineiman\SalesGrid\Model\ResourceModel\Sales\Order\GridJunior\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">ineiman_salesgrid_flat</argument>
+            <argument name="eventPrefix" xsi:type="string">ineiman_salesgrid_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">salesgrid_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Ineiman\SalesGrid\Model\ResourceModel\SalesOrderGridJunior</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="ineiman_salesgrid_listing_data_source" xsi:type="string">Ineiman\SalesGrid\Model\ResourceModel\Sales\Order\GridJunior\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="CommentHandler" type="Ineiman\SalesGrid\Model\Indexer\Handler\CommentHandler" />
+    <virtualType name="ItemsSkuHandler" type="Ineiman\SalesGrid\Model\Indexer\Handler\ItemsSkuHandler" />
+    <virtualType name="NameHandler" type="Ineiman\SalesGrid\Model\Indexer\Handler\ColumnsHandler">
+        <arguments>
+            <argument name="columnName" xsi:type="string">product_sales_order_item_name</argument>
+            <argument name="source" xsi:type="string">product_sales_order_item.name</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="SkuHandler" type="Ineiman\SalesGrid\Model\Indexer\Handler\ColumnsHandler">
+        <arguments>
+            <argument name="columnName" xsi:type="string">product_sales_order_item_sku</argument>
+            <argument name="source" xsi:type="string">product_sales_order_item.sku</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="ProductTypeHandler" type="Ineiman\SalesGrid\Model\Indexer\Handler\ColumnsHandler">
+        <arguments>
+            <argument name="columnName" xsi:type="string">product_sales_order_item_product_type</argument>
+            <argument name="source" xsi:type="string">product_sales_order_item.product_type</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="BasePriceHandler" type="Ineiman\SalesGrid\Model\Indexer\Handler\ColumnsHandler">
+        <arguments>
+            <argument name="columnName" xsi:type="string">product_sales_order_item_base_price</argument>
+            <argument name="source" xsi:type="string">product_sales_order_item.base_price</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="QtyOrderedHandler" type="Ineiman\SalesGrid\Model\Indexer\Handler\ColumnsHandler">
+        <arguments>
+            <argument name="columnName" xsi:type="string">product_sales_order_item_qty_ordered</argument>
+            <argument name="source" xsi:type="string">product_sales_order_item.qty_ordered</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="QtyInvoicedHandler" type="Ineiman\SalesGrid\Model\Indexer\Handler\ColumnsHandler">
+        <arguments>
+            <argument name="columnName" xsi:type="string">product_sales_order_item_qty_invoiced</argument>
+            <argument name="source" xsi:type="string">product_sales_order_item.qty_invoiced</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="QtyShippedHandler" type="Ineiman\SalesGrid\Model\Indexer\Handler\ColumnsHandler">
+        <arguments>
+            <argument name="columnName" xsi:type="string">product_sales_order_item_qty_shipped</argument>
+            <argument name="source" xsi:type="string">product_sales_order_item.qty_shipped</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="QtyRefundedHandler" type="Ineiman\SalesGrid\Model\Indexer\Handler\ColumnsHandler">
+        <arguments>
+            <argument name="columnName" xsi:type="string">product_sales_order_item_qty_refunded</argument>
+            <argument name="source" xsi:type="string">product_sales_order_item.qty_refunded</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="QtyCanceledHandler" type="Ineiman\SalesGrid\Model\Indexer\Handler\ColumnsHandler">
+        <arguments>
+            <argument name="columnName" xsi:type="string">product_sales_order_item_qty_canceled</argument>
+            <argument name="source" xsi:type="string">product_sales_order_item.qty_canceled</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="RowTotalHandler" type="Ineiman\SalesGrid\Model\Indexer\Handler\ColumnsHandler">
+        <arguments>
+            <argument name="columnName" xsi:type="string">product_sales_order_item_row_total</argument>
+            <argument name="source" xsi:type="string">product_sales_order_item.row_total</argument>
+        </arguments>
+    </virtualType>
+</config>

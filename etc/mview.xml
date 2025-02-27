@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Illia Neiman
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ According to LICENCE file you are not allowed to copy, use or recreate this file in any ways.
+  ~ Specially for eCommerce usage.
+  ~
+  ~ @category Ineiman
+  ~ @package SalesGrid
+  ~ @copyright Copyright (c) 2021-current Ineiman (https://github.com/illyaneiman)
+  ~ @email kg.illya.ney@gmail.com
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Mview/etc/mview.xsd">
+    <view id="ineiman_salesgrid" class="Ineiman\SalesGrid\Model\Indexer\Indexer" group="indexer">
+        <subscriptions>
+            <table name="sales_order" entity_column="entity_id" />
+            <table name="sales_order_grid" entity_column="entity_id" />
+            <table name="sales_order_item" entity_column="item_id" />
+            <table name="sales_order_address" entity_column="entity_id" />
+            <table name="sales_order_status_history" entity_column="entity_id" />
+            <table name="sales_shipment_track" entity_column="entity_id" />
+        </subscriptions>
+    </view>
+</config>

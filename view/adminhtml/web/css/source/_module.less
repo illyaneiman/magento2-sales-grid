@@ -1,0 +1,135 @@
+/*
+ * Illia Neiman
+ *
+ * NOTICE OF LICENSE
+ *
+ * According to LICENCE file you are not allowed to copy, use or recreate this file in any ways.
+ * Specially for eCommerce usage.
+ *
+ * @category Ineiman
+ * @package SalesGrid
+ * @copyright Copyright (c) 2021-current Ineiman (https://github.com/illyaneiman)
+ * @email kg.illya.ney@gmail.com
+ */
+
+@color-brownie: #514943;
+@color-darker-gray: #8a837f;
+@color-gray: #888;
+@color-gray2: #555;
+@color-white: #fff;
+@color-white2: #ddd;
+@color-white3: #e3e3e3;
+
+
+.data-grid {
+    td {
+        &.grid-junior-table-data-grid-th {
+            background-clip: padding-box;
+            background-color: @color-brownie;
+            border: .1rem solid @color-darker-gray;
+            color: @color-white;
+            padding: 1rem 1rem;
+            position: relative;
+            vertical-align: middle;
+        }
+    }
+
+    tr {
+        &._odd-row {
+            td {
+                &.grid-junior-table-data-grid-th {
+                    background-color: @color-brownie;
+                }
+            }
+        }
+        &:hover {
+            td {
+                &.grid-junior-table-data-grid-th {
+                    background-color: @color-brownie;
+                }
+            }
+        }
+    }
+}
+
+.grid-junior-tabs {
+    margin: 0 auto;
+    max-width: 800px;
+    min-width: 320px;
+    padding: 0;
+
+    .grid-junior-content {
+        display: none;
+
+        &.gridjunior-active {
+            display: block;
+        }
+    }
+
+    input {
+        &.grid-junior-tab {
+            display: none;
+
+            & + label {
+                border: 1px solid @color-white2;
+                border-bottom: 1px solid @color-white;
+                margin-left: 5px;
+            }
+
+            &._selected {
+                & + label {
+                    background: @color-white3;
+                    border: 1px solid @color-white2;
+                    border-bottom: 1px solid @color-white;
+                    color: @color-gray2;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+
+    label {
+        &.grid-junior-label {
+            border-radius: 3px 3px 0 0;
+            display: inline-block;
+            float: right;
+            margin: -6px 0 0;
+            padding: 10px 13px;
+
+            &:before {
+                margin-right: 10px;
+            }
+
+            &:hover {
+                color: @color-gray;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.admin__data-grid-action-columns-menu {
+    &._overflow {
+        .admin__action-dropdown-menu-content {
+            width: 60rem;
+        }
+    }
+}
+
+.grid-junior-table {
+    label {
+        text-align: left;
+    }
+
+    td {
+        padding: 3px 0;
+
+        &.grid-junior-cell-title {
+            padding-right: 2rem;
+        }
+    }
+
+    .grid-junior-cell-label {
+        width: 100%;
+    }
+}
